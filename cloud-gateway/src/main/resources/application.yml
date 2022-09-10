@@ -1,0 +1,27 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:  
+    gateway:    
+      routes:   
+         - id: ACCOUNT-MANAGER
+           uri: lb://ACCOUNT-MANAGER
+           predicates:      
+             - Path=/apisave/**
+        
+         - id: MUZIX-MANAGER
+           uri: lb://MUZIX-MANAGER
+           predicates:       
+               - Path=/api/**  
+     
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+     defuaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
